@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PRODUCTS } from '../constants';
 import ProductCard from './ProductCard';
+import { Product } from '../types';
 
-const ProductSelector: React.FC = () => {
-    const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
+interface ProductSelectorProps {
+    onProductSelect: (product: Product) => void;
+}
 
+const ProductSelector: React.FC<ProductSelectorProps> = ({ onProductSelect }) => {
     return (
         <section>
             <h2 className="text-2xl md:text-3xl font-bold text-center">
@@ -15,8 +18,7 @@ const ProductSelector: React.FC = () => {
                     <ProductCard
                         key={product.id}
                         product={product}
-                        isSelected={selectedProductId === product.id}
-                        onSelect={setSelectedProductId}
+                        onSelect={onProductSelect}
                     />
                 ))}
             </div>
